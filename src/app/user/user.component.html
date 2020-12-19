@@ -1,0 +1,3 @@
+<p>User with name <a [title]="user.name + ' notities'" [routerLink]="['/notes', user.id]">{{user.name}} {{user.id}}</a></p>
+<p>User with name {{user.name}}</p>
+<button (click)="onDeleteClick()">Delete {{user.name}}</button>
