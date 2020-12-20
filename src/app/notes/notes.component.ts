@@ -37,7 +37,6 @@ export class NotesComponent implements OnInit {
       });
       console.log(this.user);
       this.userName = this.user['name'];
-      
     });
 
     this.apiService.getNotesForUser(userIdFromRoute).subscribe((data: object[]) => {
@@ -60,6 +59,21 @@ export class NotesComponent implements OnInit {
       }
     });
   };
+
+  deleteNote = (noteId: string) => {
+    this.apiService.deleteNoteForUser(this.userId, noteId).subscribe((result: any) => {
+      let error = result.error;
+
+      if (error) {
+        console.log(`Error: ${error}`);
+      } else {
+        this.newContent = "";
+        this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
+          this.notes = data;
+        });
+      }
+    });
+  }
 
 
 }

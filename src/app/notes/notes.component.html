@@ -1,7 +1,11 @@
 
 <p>Zie hier de notities van {{ userName }}</p>
 
-<p *ngFor="let note of notes"> {{ note.content }}</p>
+<div *ngFor="let note of notes"> 
+    <p>Inhoud: {{ note.content }}</p>
+    <p><a [routerLink]="['/noteForm', note.id]">Wijzig deze notitie</a></p>
+    <button (click)="deleteNote(note.id)">Verwijder notitie {{ note.id }}</button>
+</div>
 
 <div>
     <input [(ngModel)]="newContent"/>

@@ -38,13 +38,18 @@ export class AppComponent implements OnInit {
     });
   };
 
-  deleteUser = (name: string) => {
-    this.apiService.deleteUser(name).subscribe((result: any) => {
+  deleteUser = (userId: string) => {
+    this.apiService.deleteUser(userId).subscribe((result: any) => {
       console.log(result);
+      let error = result.error;
 
+      if (error) {
+        console.log(`Error: ${error}`);
+      } else {
       this.apiService.getUsers().subscribe((data: string[]) => {
         this.users = data;
       });
+    }
     });
   };
 }

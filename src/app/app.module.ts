@@ -7,19 +7,22 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule} from '@angular/common/http';
 import { NotesComponent } from './notes/notes.component';
+import { NoteFormComponent } from './note-form/note-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    NotesComponent
+    NotesComponent,
+    NoteFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: AppComponent },
-      { path: 'notes/:userId', component: NotesComponent }
+      { path: 'notes/:userId', component: NotesComponent },
+      { path: 'noteForm/:noteId', component: NoteFormComponent }
     ]),
     HttpClientModule
   ],

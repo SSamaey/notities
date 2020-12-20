@@ -14,7 +14,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
     @Output() deleted = new EventEmitter<string>();
     
      onDeleteClick = () => {
-       this.deleted.emit(this.user.name);
+       this.deleted.emit(this.user.id);
      }
 
 }
