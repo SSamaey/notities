@@ -16,7 +16,6 @@ export class ApiService {
   addUser = (name: string) => {
     let data = { 'name': name };
     return this.http.post('https://apple-glacier-result.glitch.me/users', data);
-
   }
 
   deleteUser = (name: string) => {
@@ -27,7 +26,16 @@ export class ApiService {
     return this.http.delete(
       'https://apple-glacier-result.glitch.me/users', options
     );
+  }
 
+  getNotesForUser = (userId: string) => {
+    //return ['A', 'B', 'C'];
+    return this.http.get('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes');
+  };
+
+  addNoteForUser = (userId: string, content: string) => {
+    let data = { 'content': content };
+    return this.http.post('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes', data);
   }
 
 }

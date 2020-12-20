@@ -1,3 +1,11 @@
-<p>notes works! Blijkbaar niet..</p>
-<p>Zie hier de notities van {{ user }}</p>
 
+<p>Zie hier de notities van {{ userName }}</p>
+
+<p *ngFor="let note of notes"> {{ note.content }}</p>
+
+<div>
+    <input [(ngModel)]="newContent"/>
+    <button (click)="addNote()">Voeg notitie toe</button>
+</div>
+
+<p><a [routerLink]="['/']">Terug naar de gebruikerslijst</a></p>
