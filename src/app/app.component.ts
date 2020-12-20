@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService} from './api.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
    
     this.apiService.getUsers().subscribe((data: string[]) => {
+      console.log(data);
       this.users = data;
+      console.log(this.users);
     });
-
+    console.log(this.users);
   }
 
   addUser = () => {
