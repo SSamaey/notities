@@ -30,6 +30,12 @@ export class ApiService {
     return this.http.get('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes');
   }
 
+  searchNotesForUser = (userId: string, searchTerm: string) => {
+    let data = { 'searchTerm': searchTerm };
+    console.log(searchTerm);
+    return this.http.get('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes/search', {params: data});
+  }
+
   addNoteForUser = (userId: string, content: string) => {
     let data = { 'content': content };
     return this.http.post('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes', data);

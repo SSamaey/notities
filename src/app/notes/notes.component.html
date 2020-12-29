@@ -2,14 +2,24 @@
 <p>Zie hier de notities van {{ userName }}</p>
 
 <div *ngFor="let note of notes"> 
-    <p>Inhoud: {{ note.content }}</p>
-    <p><a [routerLink]="['/noteForm', note.id]">Wijzig deze notitie</a></p>
-    <button (click)="deleteNote(note.id)">Verwijder notitie {{ note.id }}</button>
+    <mat-card>
+        <mat-card-content>{{ note.content }}</mat-card-content>
+        <!--<p><a class="material-icons" [routerLink]="['/noteForm', note.id]">edit</a></p>-->
+        <mat-card-actions>
+            <button class="material-icons"><a [routerLink]="['/noteForm', note.id]">edit</a></button>
+            <button class="material-icons" (click)="deleteNote(note.id)">delete</button>
+        </mat-card-actions>
+    </mat-card> 
 </div>
 
 <div>
-    <input [(ngModel)]="newContent"/>
-    <button (click)="addNote()">Voeg notitie toe</button>
+    <!--<input [(ngModel)]="newContent"/>-->
+    <textarea [(ngModel)]="newContent"></textarea>
+    <button (click)="addNote()">Voeg nieuwe notitie toe</button>
+</div>
+<div>
+    <input [(ngModel)]="searchTerm"/>
+    <button (click)="searchNotes(searchTerm)">Filter</button>
 </div>
 
 <p><a [routerLink]="['/']">Terug naar de gebruikerslijst</a></p>

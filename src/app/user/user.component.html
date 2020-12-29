@@ -1,3 +1,5 @@
-<p>User with name <a [title]="user.name + ' notities'" [routerLink]="['/notes', user.id]"> {{ user.name }}</a></p>
+<mat-card>
+    <p><i class="material-icons">face</i> <a [title]="user.name + ' notities'" [routerLink]="['/notes', user.id]"> {{ user.name }}</a></p>
 
-<button (click)="onDeleteClick()">Delete {{user.name}}</button>
+    <button class="material-icons" (click)="onDeleteClick()">delete</button>
+</mat-card>

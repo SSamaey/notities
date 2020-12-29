@@ -18,6 +18,7 @@ export class NotesComponent implements OnInit {
   userId: string;
   notes: object;
   newContent: string;
+  searchTerm: string;
 
 
   constructor(
@@ -43,6 +44,19 @@ export class NotesComponent implements OnInit {
       this.notes = data;
       console.log(this.notes);
     })
+  }
+
+  searchNotes = (searchTerm: string) => {
+    if (searchTerm) {
+      this.apiService.searchNotesForUser(this.userId, "%" + searchTerm + "%").subscribe((data: object[]) => {
+        this.notes = data;
+        this.searchTerm = "";
+      })
+    } else {
+      this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
+        this.notes = data;
+      });
+    }   
   }
  
   addNote = () => {
@@ -74,6 +88,4 @@ export class NotesComponent implements OnInit {
       }
     });
   }
-
-
 }

@@ -1,14 +1,7 @@
 
 
 <div class="root">
-    <p>Gebruikers</p>
-
-    <app-user *ngFor="let user of users" [user]="user" (deleted)="deleteUser($event)"></app-user>
-
-    <div>
-        <input [(ngModel)]="newName"/>
-        <button (click)="addUser()">Voeg gebruiker toe</button>
-    </div>
+    <h1>Notities</h1>
 
     <div class="container">
         <router-outlet></router-outlet>
