@@ -35,20 +35,34 @@ export class ApiService {
     console.log(searchTerm);
     return this.http.get('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes/search', {params: data});
   }
+  filterCategoryNotesForUser = (userId: string, categoryId: string) => {
 
-  addNoteForUser = (userId: string, content: string) => {
-    let data = { 'content': content };
+    return this.http.get('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes/filterCategory/'+ categoryId);
+  }
+
+  addNoteForUser = (userId: string, content: string, categoryId: string) => {
+    let data = { 'content': content, 'categoryId': categoryId };
     return this.http.post('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes', data);
   }
 
-  updateNoteForUser = (userId: string, noteId: string, content: string) => {
-    let data = { 'content': content };
+  updateNoteForUser = (userId: string, noteId: string, content: string, categoryId: string) => {
+    let data = { 'content': content, 'categoryId': categoryId };
     return this.http.patch('https://apple-glacier-result.glitch.me/users/'+ userId +'/notes/'+ noteId, data);
   }
 
   getNote = (noteId: string) => {
 
     return this.http.get('https://apple-glacier-result.glitch.me/users/notes/'+ noteId);
+  }
+
+  getCategories = () => {
+
+    return this.http.get('https://apple-glacier-result.glitch.me/categories/');
+  }
+
+  getCategory = (categoryId: string) => {
+
+    return this.http.get('https://apple-glacier-result.glitch.me/categories/' + categoryId);
   }
 
   deleteNoteForUser = (userId: string, noteId: string) => {

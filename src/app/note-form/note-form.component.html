@@ -1,9 +1,0 @@
-
-<h2>Wijzig deze notitie:</h2>
-<p>{{ currentContent }}</p>
-<div>
-    <textarea [value]="currentContent" [(ngModel)]="newContent"></textarea>
-    <button (click)="updateNote()">Wijzig deze notitie</button>
-</div>
-
-<p><a [routerLink]="['/notes/', userId]">Terug naar de lijst notities</a></p>

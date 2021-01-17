@@ -1,5 +1,5 @@
 <mat-card>
-    <p><i class="material-icons">face</i> <a [title]="user.name + ' notities'" [routerLink]="['/notes', user.id]"> {{ user.name }}</a></p>
+    <a [title]="user.name + ' notities'" [routerLink]="['/notes', user.id]"> {{ user.name }}</a>
 
-    <button class="material-icons" (click)="onDeleteClick()">delete</button>
+    <button title="verwijder deze gebruiker" class="material-icons" (click)="onDeleteClick()">delete</button>
 </mat-card>

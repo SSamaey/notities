@@ -1,0 +1,39 @@
+<mat-card class="notitie">
+    <mat-card-content [class]="label">
+        <p *ngIf = "!edit" style="white-space: pre-wrap;">{{ note.content }}</p>
+        <div *ngIf = "!edit" class="catLabel">
+            <p *ngIf = "label">Categorie: {{ label }}</p>
+            <p *ngIf = "!label">(geen categorie)</p>
+        </div>
+            
+
+        <p *ngIf = "edit">
+            <label>Wijzig deze notitie</label>
+            <textarea class="textNote" [(ngModel)]="newContent"></textarea>
+            <!--<label>Categorie: </label>
+            <select name="category" [(ngModel)]="newCategoryId">
+                <option *ngFor="let cat of categories" [value]="cat.id"> {{ cat.label }} </option>
+            </select>-->
+            <label>Categorie: </label>
+            <select name="category" [(ngModel)]="newCategoryId">
+                <ng-container *ngFor="let cat of categories">
+                    <ng-container *ngIf="cat.id == note.categoryId">
+                        <option selected [value]="cat.id"> {{ cat.label }} </option>
+                    </ng-container>
+                    <ng-container *ngIf="cat.id != note.categoryId">
+                        <option [value]="cat.id"> {{ cat.label }} </option>
+                    </ng-container>
+                </ng-container>               
+            </select><br/>
+            <button class="material-icons" (click)="updateNote()" title="sla wijzigingen op">save_alt</button>
+
+        </p>
+    
+    </mat-card-content>
+    <mat-card-actions>
+        <button *ngIf = "!edit" class="material-icons" (click)="changeEditStatus()" title="wijzig notitie">edit</button>
+        
+        <button *ngIf = "edit" class="material-icons" (click)="undoEdit()" title="wijziging ongedaan maken">clear</button>
+        <button class="material-icons" (click)="onDeleteClick()" title="verwijder deze notitie">delete</button>
+    </mat-card-actions>
+</mat-card>

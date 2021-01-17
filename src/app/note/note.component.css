@@ -1,0 +1,40 @@
+
+
+.blauw {
+    background-color: lightblue;
+}
+
+.rood {
+    background-color: #ff5050;
+}
+
+.geel {
+    background-color: #ffff99;
+}
+
+.groen {
+    background-color: #79d2a6;
+}
+
+mat-card {
+    margin: 10px;
+    width: 500px;
+    max-width: 90%;
+}
+
+mat-card-content {
+    padding: 10px;
+}
+
+mat-card-actions {
+    padding: 10px;
+}
+
+.catLabel {
+    position: relative;
+    float:right;
+}
+
+.textNote {
+    width: 90%
+}

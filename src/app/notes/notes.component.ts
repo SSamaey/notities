@@ -19,6 +19,10 @@ export class NotesComponent implements OnInit {
   notes: object;
   newContent: string;
   searchTerm: string;
+  categories: object[];
+  newCategoryId: string;
+  filterCategoryId: string;
+  notesNumber: number;
 
 
   constructor(
@@ -40,10 +44,17 @@ export class NotesComponent implements OnInit {
       this.userName = this.user['name'];
     });
 
-    this.apiService.getNotesForUser(userIdFromRoute).subscribe((data: object[]) => {
+    this.apiService.getNotesForUser(userIdFromRoute).subscribe((data: object[][]) => {
+      console.log(data);
       this.notes = data;
+      this.notesNumber = data.length;
       console.log(this.notes);
     })
+
+    this.apiService.getCategories().subscribe((data: object[]) => {
+      console.log(data);
+      this.categories = data;
+    });
   }
 
   searchNotes = (searchTerm: string) => {
@@ -58,20 +69,42 @@ export class NotesComponent implements OnInit {
       });
     }   
   }
+
+  filterNotesCategory = (filterCategoryId: string) => {
+    if (filterCategoryId) {
+      this.apiService.filterCategoryNotesForUser(this.userId, filterCategoryId).subscribe((data: object[]) => {
+        this.notes = data;
+        this.filterCategoryId = "";
+      })
+    } else {
+      this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
+        this.notes = data;
+      });
+    }   
+  }
  
   addNote = () => {
-    this.apiService.addNoteForUser(this.userId, this.newContent).subscribe((result: any) => {
-      let error = result.error;
 
-      if (error) {
-        console.log(`Error: ${error}`);
-      } else {
-        this.newContent = "";
-        this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
-          this.notes = data;
-        });
-      }
-    });
+    if (!this.newContent){
+      window.alert('Voeg tekst toe aan de notitie. De notitie werd niet bewaard.');
+    } else {
+      this.apiService.addNoteForUser(this.userId, this.newContent, this.newCategoryId).subscribe((result: any) => {
+      
+        let error = result.error;
+  
+        if (error) {
+          console.log(`Error: ${error}`);
+        } else {
+          this.newContent = "";
+          this.newCategoryId = "";
+          this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
+            this.notes = data;
+            this.notesNumber = data.length;
+          });
+        }
+      });
+    }
+    
   };
 
   deleteNote = (noteId: string) => {
@@ -84,8 +117,17 @@ export class NotesComponent implements OnInit {
         this.newContent = "";
         this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
           this.notes = data;
+          this.notesNumber = data.length;
         });
       }
     });
+  }
+
+  update = () => {
+
+        this.apiService.getNotesForUser(this.userId).subscribe((data: object[]) => {
+          this.notes = data;
+          this.notesNumber = data.length;
+        });
   }
 }

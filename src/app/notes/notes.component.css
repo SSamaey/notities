@@ -1,0 +1,17 @@
+mat-card {
+    margin: 10px;
+    width: 500px;
+    max-width: 90%;
+}
+
+mat-card-content {
+    padding: 10px;
+}
+
+.textNote {
+    width: 90%
+}
+button{
+    position: relative;
+    float:right;
+}

@@ -1,25 +1,41 @@
 
-<p>Zie hier de notities van {{ userName }}</p>
+<h2>Notities van {{ userName }}</h2>
 
-<div *ngFor="let note of notes"> 
-    <mat-card>
-        <mat-card-content>{{ note.content }}</mat-card-content>
-        <!--<p><a class="material-icons" [routerLink]="['/noteForm', note.id]">edit</a></p>-->
-        <mat-card-actions>
-            <button class="material-icons"><a [routerLink]="['/noteForm', note.id]">edit</a></button>
-            <button class="material-icons" (click)="deleteNote(note.id)">delete</button>
-        </mat-card-actions>
-    </mat-card> 
+<p><a [routerLink]="['/']">Klik hier om terug te keren naar de gebruikerslijst</a></p>
+
+<p *ngIf = "notesNumber == 0">{{ userName }} heeft momenteel geen notities.</p>
+
+<div *ngIf = "notesNumber > 0">
+    <mat-card class="filter">
+        <mat-card-content>
+            <h3>Filter notities</h3>
+            <label>Zoek: </label><br/>
+            <input [(ngModel)]="searchTerm"/>
+            <button (click)="searchNotes(searchTerm)">Filter op zoekterm</button><br/><br/>
+            <label>Selecteer een categorie: </label><br/>
+            <select name="category" [(ngModel)]="filterCategoryId">
+                <option *ngFor="let cat of categories" [value]="cat.id"> {{ cat.label }}</option>
+            </select>
+            <button (click)="filterNotesCategory(filterCategoryId)">Filter op categorie</button>
+        </mat-card-content>
+    </mat-card>
+    
+    <app-note *ngFor="let note of notes" [note]="note" (deleted)="deleteNote($event)" (updated)="update($event)"></app-note>
 </div>
 
-<div>
-    <!--<input [(ngModel)]="newContent"/>-->
-    <textarea [(ngModel)]="newContent"></textarea>
-    <button (click)="addNote()">Voeg nieuwe notitie toe</button>
-</div>
-<div>
-    <input [(ngModel)]="searchTerm"/>
-    <button (click)="searchNotes(searchTerm)">Filter</button>
-</div>
+<mat-card class="newNote">
+    <mat-card-content>
+        <h3>Voeg hier een nieuwe notitie toe:</h3>
+        <textarea class="textNote" [(ngModel)]="newContent"></textarea>
+        <label>Categorie: </label>
+        <select name="category" [(ngModel)]="newCategoryId">
+            <option *ngFor="let cat of categories" [value]="cat.id"> {{ cat.label }}</option>
+        </select>
+        <br/>
+        <button (click)="addNote()">Voeg nieuwe notitie toe</button>
+    </mat-card-content>
+</mat-card>
 
-<p><a [routerLink]="['/']">Terug naar de gebruikerslijst</a></p>
+
+
+

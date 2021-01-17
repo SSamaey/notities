@@ -1,10 +1,14 @@
 <h2>Gebruikers</h2>
 
-<p>Klik op de naam om de notities van de gebruiker te bekijken.</p>
+<p>Klik op de naam om de notities van de gebruiker te beheren.</p>
 
-    <app-user *ngFor="let user of users" [user]="user" (deleted)="deleteUser($event)"></app-user>
+    <app-user *ngFor="let user of users" [user]="user" (deleted)="deleteUser($event)"></app-user> 
 
-    <div>
-        <input [(ngModel)]="newName"/>
-        <button (click)="addUser()">Voeg nieuwe gebruiker toe</button>
-    </div>
+    <mat-card>
+        <div>
+            <p>Voeg hier een nieuwe gebruiker toe</p>
+            <label>Naam: </label>
+            <input [(ngModel)]="newName"/>
+            <button title="voeg gebruiker toe" (click)="addUser()">Voeg gebruiker toe</button>
+        </div>
+    </mat-card>
